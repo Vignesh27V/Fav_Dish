@@ -1,0 +1,17 @@
+[33mcommit b777583ebfcf3f44fb7450ad7985f50bbe060fff[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Vignesh27V <svmvignesh27@gmail.com>
+Date:   Thu Mar 27 17:29:53 2025 +0530
+
+    Implement splash screen with some animation
+
+[33mcommit 493b0dee5240e9f10049b224591e319212b361bb[m
+Author: Vignesh27V <svmvignesh27@gmail.com>
+Date:   Thu Mar 27 16:04:22 2025 +0530
+
+    Improve status bar hiding
+
+[33mcommit b71032626d8e1304a2d3290abcc019230b11458c[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Vignesh V (MS/EHM-TS) <gff1cob@bosch.com>
+Date:   Thu Mar 27 13:34:10 2025 +0530
+
+    Initial commit with splash screen
