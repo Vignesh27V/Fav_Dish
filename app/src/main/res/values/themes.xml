@@ -15,12 +15,13 @@
     </style>
 
     <!-- Theme for showing no systems bar. This theme is used only in splash screen activity -->
-<!--    <style name="Theme.FavDish.Light.NoActionBar" parent="Theme.AppCompat.NoActionBar">-->
-    <style name="Theme.FavDish.NoActionBar">
+    <!-- <style name="Theme.FavDish.Light.NoActionBar" parent="Theme.AppCompat.NoActionBar"> -->
+    <style name="Theme.FavDish.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-<!--        //here the parent="Theme.AppCompat.NoActionBar" did the two lines written above-->
+    <!-- //here the parent="Theme.AppCompat.NoActionBar" did the two lines written above-->
     </style>
+
     <style name="Theme.FavDish.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.FavDish.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -15,7 +15,11 @@
         <activity
             android:name=".view.activities.AddUpdateDishActivity"
             android:exported="false"
-            android:theme="@style/Theme.FavDish.NoActionBar"/>
+            android:theme="@style/Theme.FavDish.NoActionBar"
+            android:configChanges="orientation"/>
+<!--
+        the configChange make sure the screen will not rotate if we rotate our phone
+-->
         <activity
             android:name=".view.activities.SplashActivity"
             android:exported="true"
@@ -28,8 +32,7 @@
         </activity>
         <activity
             android:name=".view.activities.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name" />
+            android:exported="true" />
     </application>
 
 </manifest>

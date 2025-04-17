@@ -6,16 +6,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.favdish.R
+import com.example.favdish.databinding.ActivityAddUpdateDishBinding
 
 class AddUpdateDishActivity : AppCompatActivity() {
+
+    lateinit var mBinding: ActivityAddUpdateDishBinding //Using view Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_add_update_dish)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        mBinding = ActivityAddUpdateDishBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
+        setUpActionBar()
+
+    }
+    private fun setUpActionBar(){
+        setSupportActionBar(mBinding.toolbarAddDishActivity) //set up the custom tool bar for us to customize with our icons
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //this line is responsible for showing the arrow at the top
+        mBinding.toolbarAddDishActivity.setNavigationOnClickListener {
+            onBackPressed()
         }
     }
+
 }
