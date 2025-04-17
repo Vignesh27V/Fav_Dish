@@ -52,10 +52,12 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.tvCamera.setOnClickListener {
             Toast.makeText(this, "Camera is clicked", Toast.LENGTH_SHORT).show()
+            dialog.dismiss() // to make the dialog disappear when it is clicked
         }
 
         binding.tvGallery.setOnClickListener {
             Toast.makeText(this, "Gallery is clicked", Toast.LENGTH_SHORT).show()
+            dialog.dismiss() // to make the dialog disappear when it is clicked
         }
 
         dialog.show() // To show the dialog
