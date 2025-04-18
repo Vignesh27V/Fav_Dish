@@ -32,7 +32,9 @@ import com.karumi.dexter.listener.single.PermissionListener
 class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mBinding: ActivityAddUpdateDishBinding
-    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
+    private lateinit var cameraLauncher: ActivityResultLauncher<Intent> // for camera launch
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent> // for gallery launch
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,22 +47,34 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         // Register camera launcher
         //for below code Think of this as registering a "callback" that Android will trigger after the camera activity finishes and returns data.
         cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-
             //CALLBACK ==> “Hey Android! I’m placing a request to open the camera app. And here’s what to do when the result comes back!”
             //the below code is the call back func code like when the result return what needs to be done is written below
             //Callback = “Call me back when you’re done”
             //CALLBACK RULE ==>“When something takes time or involves another app or activity — use a callback to say what to do when it comes back.”
             //the block of code inside { result -> ... } is your callback function
-
             if (result.resultCode == RESULT_OK) {
                 val data: Intent? = result.data
                 val thumbnail = data?.extras?.get("data") as? Bitmap
                 thumbnail?.let {
-                    mBinding.ivDishImage.setImageBitmap(it)
+                    mBinding.ivDishImage.setImageBitmap(it) // " it " refer to Bitmap
                     mBinding.ivAddDishImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_edit_24))
                 }
             }
         }
+
+        //Register for Gallery launcher
+        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK && result.data != null) {
+                val selectedImageUri: Uri? = result.data?.data
+                selectedImageUri?.let {
+                    mBinding.ivDishImage.setImageURI(it)
+                    mBinding.ivAddDishImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_edit_24))
+                }
+            } else {
+                Toast.makeText(this, "Image selection canceled", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     private fun setUpActionBar() {
@@ -140,11 +154,8 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                 )
                 .withListener(object : PermissionListener {
                     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                        Toast.makeText(
-                            this@AddUpdateDishActivity,
-                            "Gallery permission granted",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        galleryLauncher.launch(galleryIntent)
                     }
 
                     override fun onPermissionDenied(response: PermissionDeniedResponse?) {
@@ -191,7 +202,4 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
             }.show()
     }
 
-    companion object {
-        private const val CAMERA_REQUEST_CODE = 1 // Unused now, but retained for reference
-    }
 }
